@@ -8,7 +8,7 @@ export const Dashboard = () => {
 
     const handleLogout = () => {
         auth.signOut();
-        navigate("/LoginSignup");
+        navigate("/login");
 
     };
 
