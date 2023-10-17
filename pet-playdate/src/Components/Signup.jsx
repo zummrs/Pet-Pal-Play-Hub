@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { auth } from '../firebase/firebase';
+import { updateProfile } from 'firebase/auth';
 import email_icon from './Assets/email.png';
 import password_icon from './Assets/password.png';
 import user_icon from './Assets/person.png'
+
+
 
 const Signup = () => {
   const [email, setEmail] = useState('');
@@ -33,15 +36,20 @@ const Signup = () => {
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
+      console.log('Signup button clicked');
       const userCredential = await auth.createUserWithEmailAndPassword(email, password);
       console.log('Signup successful:', userCredential);
+  
+      const user = userCredential.user;
+  
+      await updateProfile(user, { displayName: username });
       navigate('/');
     } catch (error) {
       console.error('Signup error:', error);
       setError(mapFirebaseErrorToMessage(error.code));
     }
   };
-
+  
   return (
     <div className='container'>
       <div className='header'>
