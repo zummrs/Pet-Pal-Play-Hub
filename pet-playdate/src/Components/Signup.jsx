@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { auth } from '../../firebase/firebase';
-import email_icon from '../Assets/email.png';
-import password_icon from '../Assets/password.png';
-import user_icon from '../Assets/person.png'
+import { auth } from '../firebase/firebase';
+import email_icon from './Assets/email.png';
+import password_icon from './Assets/password.png';
+import user_icon from './Assets/person.png'
 
 const Signup = () => {
   const [email, setEmail] = useState('');

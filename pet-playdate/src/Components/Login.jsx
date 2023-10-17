@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { auth } from '../../firebase/firebase';
+import { auth } from '../firebase/firebase';
 import './LoginSignup.css';
-import email_icon from '../Assets/email.png';
-import password_icon from '../Assets/password.png';
+import email_icon from './Assets/email.png';
+import password_icon from './Assets/password.png';
 
 const mapFirebaseErrorToMessage = (errorCode) => {
   switch (errorCode) {
@@ -73,7 +73,7 @@ const Login = () => {
       </div>
       {errorMessage && <div className='error-message'>{errorMessage}</div>}
       <div className='forgot-password-link'>
-        <Link to='/forgot-password'>Forgot your password?</Link>
+        <Link to='/forgotpassword'>Forgot your password?</Link>
       </div>
       <div className='signup-link'>
         <span>Don't have an account? </span>
