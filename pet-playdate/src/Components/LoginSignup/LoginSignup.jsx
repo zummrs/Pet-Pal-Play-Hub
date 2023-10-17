@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './LoginSignup.css';
 import { auth } from '../../firebase/firebase';
+import { useNavigate } from 'react-router-dom'
 
 import user_icon from '../Assets/person.png';
 import email_icon from '../Assets/email.png';
@@ -11,12 +12,14 @@ export const LoginSignup = () => {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate()
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       await auth.signInWithEmailAndPassword(email, password);
       // Handle successful login
+      navigate("/")
     } catch (error) {
       console.error('Login error:', error);
     }
@@ -28,6 +31,7 @@ export const LoginSignup = () => {
       console.log('Signup button clicked');
       const userCredential = await auth.createUserWithEmailAndPassword(email, password);
       console.log('Signup successful:', userCredential);
+      navigate("/")
       // Handle successful signup, if needed
     } catch (error) {
       console.error('Signup error:', error);
