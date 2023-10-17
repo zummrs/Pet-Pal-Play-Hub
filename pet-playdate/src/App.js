@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import { LoginSignup } from './Components/LoginSignup';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import { Dashboard } from './Components/Dashboard';
 import Login from './Components/Login';
@@ -13,7 +12,6 @@ function App() {
       <Router>
         <Routes>
           <Route exact path="/" Component={Dashboard} />
-          <Route path='/loginsignup' Component={LoginSignup} />
           <Route path='/login' Component={Login} />
           <Route path='/signup' Component={Signup} />
           <Route path='/forgotpassword' Component={Forgotpassword} />
