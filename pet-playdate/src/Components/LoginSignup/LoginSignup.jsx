@@ -1,41 +1,100 @@
-import React, {useState} from 'react'
-import './LoginSignup.css'
+import React, { useState } from 'react';
+import './LoginSignup.css';
+import { auth } from '../../firebase/firebase';
 
-import user_icon from '../Assets/person.png'
-import email_icon from '../Assets/email.png'
-import password_icon from '../Assets/password.png'
+import user_icon from '../Assets/person.png';
+import email_icon from '../Assets/email.png';
+import password_icon from '../Assets/password.png';
 
 export const LoginSignup = () => {
+  const [action, setAction] = useState('Login');
+  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
-    const [action, setAction] = useState("Login");
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      await auth.signInWithEmailAndPassword(email, password);
+      // Handle successful login
+    } catch (error) {
+      console.error('Login error:', error);
+    }
+  };
 
+  const handleSignup = async (e) => {
+    e.preventDefault();
+    try {
+      console.log('Signup button clicked');
+      const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+      console.log('Signup successful:', userCredential);
+      // Handle successful signup, if needed
+    } catch (error) {
+      console.error('Signup error:', error);
+    }
+  };
 
   return (
     <div className='container'>
-        <div className='header'>
-            <div className='text'>{action}</div>
-            <div className='underline'></div>
-
+      <div className='header'>
+        <div className='text'>{action}</div>
+        <div className='underline'></div>
+      </div>
+      <div className='inputs'>
+        {action === 'Login' ? null : (
+          <div className='input'>
+            <img src={user_icon} alt='' />
+            <input
+              type='text'
+              placeholder='Username'
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </div>
+        )}
+        <div className='input'>
+          <img src={email_icon} alt='' />
+          <input
+            type='email'
+            placeholder='Email'
+            onChange={(e) => setEmail(e.target.value)}
+          />
         </div>
-        <div className='inputs'>
-            {action==="Login"? <div></div>: <div className='input'>
-                <img src={user_icon} alt="" />
-                <input type="text" placeholder='Username'/>
-            </div>}
-            <div className='input'>
-                <img src={email_icon} alt="" />
-                <input type="email" placeholder='Email'/>
-            </div>
-            <div className='input'>
-                <img src={password_icon} alt="" />
-                <input type="password" placeholder='Password'/>
-            </div>
+        <div className='input'>
+          <img src={password_icon} alt='' />
+          <input
+            type='password'
+            placeholder='Password'
+            onChange={(e) => setPassword(e.target.value)}
+          />
         </div>
-        {action==="Sign Up"? <div></div>:<div className="forgot-password">Forgot Password? <span>Click Here</span></div>}
-        <div className='submit-container'>
-                <div className={action === "Login"?"submit gray": "submit"} onClick={()=>{setAction("Sign Up")}}>Sign Up</div>
-                <div className={action === "Sign Up"?"submit gray": "submit"}onClick={()=>{setAction("Login")}}>Login</div>
-            </div>
+      </div>
+      {action === 'Sign Up' ? null : (
+        <div className='forgot-password'>
+          Forgot Password? <span>Click Here</span>
+        </div>
+      )}
+      <div className='submit-container'>
+        <div
+          className={action === 'Login' ? 'submit gray' : 'submit'}
+          onClick={(e) => {
+            // console.log('Login button clicked');
+            setAction('Login');
+            handleLogin(e);
+          }}
+        >
+          Login
+        </div>
+        <div
+          className={action === 'Sign Up' ? 'submit gray' : 'submit'}
+          onClick={(e) => {
+            // console.log('Sign Up button clicked');
+            setAction('Sign Up');
+            handleSignup(e);
+          }}
+        >
+          Sign Up
+        </div>
+      </div>
     </div>
-  )
-}
+  );
+};
