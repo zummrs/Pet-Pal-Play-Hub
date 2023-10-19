@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pet Playdate Website</title>
+    <link rel="stylesheet" type="text/css" href="styles/stylesheet.css">
+</head>
+<body>
+    <header>
+        <h1>Pet Playdate</h1>
+    </header>
+    
+    <div class="container">
+        
+        <section id="create-playdate">
+            <h2>Create Playdate</h2>
+            <form data-pet-playdate="form">
+                <div class="form-group">
+                    <label for="petName">Pet's Name</label>
+                    <input class="form-control" name="pet" id="petName" autofocus>
+                </div>
+                <div class="form-group">
+                    <label for="ownerName">Owner's Name</label>
+                    <input class="form-control" name="owner" id="ownerName" value="" placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                    <label for="playDate">Date for Play Date</label>
+                    <input class="form-control" type="date" name="date" id="playDate">
+                </div>
+                <div class="form-group">
+                    <label for="playTime">Time for Play Date</label>
+                    <input class="form-control" type="time" name="time" id="playTime">
+                </div>
+                <button type="submit" class="btn btn-default">Schedule Playdate</button>
+            </form>
+        </section>
+
+        <section id="playdates">
+            <h2>Playdate Listings</h2>
+            <ul id="playdate-list"></ul>
+        </section>
+    </div>
+
+    <script src="scripts/main.js"></script>
+</body>
+</html>
