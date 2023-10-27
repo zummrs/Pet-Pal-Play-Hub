@@ -90,6 +90,14 @@ export const Dashboard = () => {
     // Here, you should send the new playdate information to your backend or data source
     // and then update the playdates state with the newly created playdate.
 
+
+    // check if fields are empty
+    if (!petName || !newPlaydate.date) {
+      // Display an error message or handle the validation as needed
+      alert('Pet Name and Date are required fields.');
+      return; // Prevent submission
+    }
+  
     // For this example, let's assume the backend sends back the new playdate with an ID.
     const newPlaydateWithId = {
       petName,
@@ -118,6 +126,8 @@ export const Dashboard = () => {
     }
   }, []);
 
+  playdates.sort((a, b) => new Date(a.date) - new Date(b.date));
+
   return (
     <div style={styles.container}>
       <div>
@@ -134,6 +144,7 @@ export const Dashboard = () => {
           value={petName}
           onChange={(e) => setPetName(e.target.value)}
           style={styles.input}
+          required
         />
         <label style={styles.label}>Date</label>
         <input
@@ -142,6 +153,7 @@ export const Dashboard = () => {
           value={newPlaydate.date}
           onChange={handleInputChange}
           style={styles.input}
+          required
         />
         <button onClick={handlePlaydateSubmit} style={styles.button}>
           Schedule
