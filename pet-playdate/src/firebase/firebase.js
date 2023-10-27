@@ -1,6 +1,6 @@
 import firebase from 'firebase/compat/app'
 import 'firebase/compat/auth'
-import 'firebase/compat/firestore'
+import { getFirestore, collection }  from 'firebase/firestore'
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -14,4 +14,8 @@ const app = firebase.initializeApp({
 })
 
 export const auth = app.auth()
+
+export const db = getFirestore(app);
+export const playdatesCollectionRef = collection(db, 'playdates');
+
 export default app
