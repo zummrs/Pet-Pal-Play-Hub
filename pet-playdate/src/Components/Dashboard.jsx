@@ -49,6 +49,7 @@ const styles = {
 };
 
 export const Dashboard = () => {
+  // declare local vars
   const [username] = useState('User'); // Remove owner's name
   const [petName, setPetName] = useState('');
   const [playdates, setPlaydates] = useState([]);
@@ -64,7 +65,7 @@ export const Dashboard = () => {
     navigate('/login');
   };
 
-  // input
+  // input handlers
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setNewPlaydate({
@@ -147,6 +148,8 @@ export const Dashboard = () => {
     }
   }, []);
 
+
+  // sort local playdates[] by date
   playdates.sort((a, b) => new Date(a.date) - new Date(b.date));
 
   return (
