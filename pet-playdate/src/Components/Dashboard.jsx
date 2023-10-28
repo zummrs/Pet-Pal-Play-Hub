@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../firebase/firebase';
+
+// db
 import { playdatesCollectionRef } from '../firebase/firebase';  // ref to playdates collection in firestore(db)
 import 'firebase/compat/firestore';
 import { addDoc, getDocs } from 'firebase/firestore';
+
+// image storage
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { storage } from '../firebase/firebase';
 
 const styles = {
   container: {
@@ -49,6 +55,7 @@ export const Dashboard = () => {
   const [newPlaydate, setNewPlaydate] = useState({
     date: '',
   });
+  const [image, setImage] = useState(null);
 
   const navigate = useNavigate();
 
@@ -57,12 +64,18 @@ export const Dashboard = () => {
     navigate('/login');
   };
 
+  // input
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setNewPlaydate({
       ...newPlaydate,
       [name]: value,
     });
+  };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    setImage(file);
   };
   
   // fetch playdates from firestore -> setPlaydates
@@ -86,27 +99,34 @@ export const Dashboard = () => {
   }, []);
 
 
-  const handlePlaydateSubmit = () => {
+  const handlePlaydateSubmit = async () => {
     // Here, you should send the new playdate information to your backend or data source
     // and then update the playdates state with the newly created playdate.
 
 
     // check if fields are empty
-    if (!petName || !newPlaydate.date) {
+    if (!petName || !newPlaydate.date || !image) {
       // Display an error message or handle the validation as needed
       alert('Pet Name and Date are required fields.');
       return; // Prevent submission
     }
-  
+
+    // create a ref to storage w/ image name, then upload and get the url
+    const storageRef = ref(storage, 'images/' + image.name);
+    uploadBytes(storageRef, image);
+    const imageUrl = await getDownloadURL(storageRef);
+    
+
     // For this example, let's assume the backend sends back the new playdate with an ID.
     const newPlaydateWithId = {
       petName,
       date: newPlaydate.date,
       id: playdates.length + 1, // You should adjust this according to your backend logic.
+      img: imageUrl // store url (img src)
     };
 
     // post submission to firestore
-    addDoc(playdatesCollectionRef, newPlaydateWithId)
+    await addDoc(playdatesCollectionRef, newPlaydateWithId)
      
     // update local
     setPlaydates([...playdates, newPlaydateWithId]);
@@ -114,6 +134,7 @@ export const Dashboard = () => {
     // Clear the form
     setNewPlaydate({
       date: '',
+      image: null,
     });
     
   };
@@ -155,6 +176,14 @@ export const Dashboard = () => {
           style={styles.input}
           required
         />
+        
+        <label style={styles.label}>Please upload a picture of your pet</label>
+        <input
+          type="file"
+          accept="image/*" 
+          onChange={handleImageChange} 
+          style={styles.input}
+        />
         <button onClick={handlePlaydateSubmit} style={styles.button}>
           Schedule
         </button>
@@ -167,6 +196,7 @@ export const Dashboard = () => {
             <div>
               <div>Pet: {playdate.petName}</div>
               <div>Date: {playdate.date}</div>
+              <img src={playdate.img} width="200" height="200" alt="Playdate"/>
             </div>
           </li>
         ))}
