@@ -13,6 +13,7 @@ const Signup = () => {
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
   const [error, setError] = useState(null);
+  const [emailVerification, setEmailVerification] = useState(false);
   const navigate = useNavigate();
 
 
@@ -41,9 +42,11 @@ const Signup = () => {
       console.log('Signup successful:', userCredential);
   
       const user = userCredential.user;
-  
+
+      await user.sendEmailVerification();
+      setEmailVerification(true);
       await updateProfile(user, { displayName: username });
-      navigate('/');
+      // navigate('/');
     } catch (error) {
       console.error('Signup error:', error);
       setError(mapFirebaseErrorToMessage(error.code));
@@ -85,6 +88,11 @@ const Signup = () => {
       <div className='error-message'>
         {error && <span>{error}</span>}
       </div>
+      {emailVerification ? (
+        <div className='verification-message'>
+          Verification email sent! Please check your email and verify your account.
+        </div>
+      ) : null}
       <div className='submit-container'>
         <div
           className='submit'

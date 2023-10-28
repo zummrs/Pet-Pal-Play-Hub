@@ -16,45 +16,61 @@ const styles = {
     maxWidth: '600px',
     margin: '0 auto',
     padding: '20px',
+    backgroundColor: '#f4f4f4',
+    border: '1px solid #ccc',
+    borderRadius: '5px',
+    boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)',
   },
   inputContainer: {
     display: 'flex',
     flexDirection: 'column',
-    marginBottom: '10px',
+    marginBottom: '20px',
   },
   label: {
-    marginBottom: '5px',
+    marginBottom: '8px',
+    fontWeight: 'bold',
   },
   input: {
-    padding: '5px',
+    padding: '10px',
+    border: '1px solid #ccc',
+    borderRadius: '5px',
+    marginBottom: '15px',
   },
   button: {
-    padding: '10px',
-    backgroundColor: ' #FFBF00',
-    color: 'white',
+    padding: '12px',
+    backgroundColor: '#FFBF00',
+    color: 'black',
     border: 'none',
     cursor: 'pointer',
+    borderRadius: '5px',
   },
   playdateList: {
     marginTop: '20px',
   },
   playdateItem: {
-    backgroundColor: 'lightgray',
-    padding: '10px',
-    margin: '5px 0',
+    backgroundColor: 'white',
+    padding: '15px',
+    margin: '10px 0',
     display: 'flex',
-    justifyContent: 'space-between',
+    flexDirection: 'column',
     alignItems: 'center',
+    boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)',
+    border: '1px solid #ccc',
+    borderRadius: '5px',
   },
 };
 
+
 export const Dashboard = () => {
   // declare local vars
-  const [username] = useState('User'); // Remove owner's name
+  const [username, setUsername] = useState(''); // Remove owner's name
   const [petName, setPetName] = useState('');
+  const [location, setLocation] = useState('');
+  const [ownerName, setOwnerName] = useState('');
   const [playdates, setPlaydates] = useState([]);
   const [newPlaydate, setNewPlaydate] = useState({
     date: '',
+    time: '',
   });
   const [image, setImage] = useState(null);
 
@@ -90,6 +106,11 @@ export const Dashboard = () => {
         querySnapshot.forEach((doc) => {
           playdatesData.push({ id: doc.id, ...doc.data() });
         });
+        
+        const currentUser = auth.currentUser;
+        if(currentUser){
+          setUsername(currentUser.displayName);
+        }
 
         // local
         setPlaydates(playdatesData);
@@ -106,9 +127,9 @@ export const Dashboard = () => {
 
 
     // check if fields are empty
-    if (!petName || !newPlaydate.date || !image) {
+    if (!ownerName || !petName || !location || !newPlaydate.date || !image) {
       // Display an error message or handle the validation as needed
-      alert('Pet Name and Date are required fields.');
+      alert('All fields required.');
       return; // Prevent submission
     }
 
@@ -118,11 +139,21 @@ export const Dashboard = () => {
     const imageUrl = await getDownloadURL(storageRef);
     
 
+    const timeConversion = (timeConverted) => {
+      const [hours, minutes] = timeConverted.split(':');
+      const amPm = hours >= 12 ? "PM" : "AM";
+      const hoursFormat = (hours % 12) || 12;
+
+      return `${hoursFormat}:${minutes} ${amPm}`;
+    };
     // For this example, let's assume the backend sends back the new playdate with an ID.
     const newPlaydateWithId = {
+      ownerName, 
       petName,
+      location,
       date: newPlaydate.date,
       id: playdates.length + 1, // You should adjust this according to your backend logic.
+      time: timeConversion(newPlaydate.time), 
       img: imageUrl // store url (img src)
     };
 
@@ -153,6 +184,8 @@ export const Dashboard = () => {
   playdates.sort((a, b) => new Date(a.date) - new Date(b.date));
 
   return (
+
+
     <div style={styles.container}>
       <div>
         <div>Hello, {username}</div>
@@ -161,12 +194,30 @@ export const Dashboard = () => {
 
       <h2>Schedule a Playdate</h2>
       <div style={styles.inputContainer}>
+        <label style={styles.label}>Owner</label>
+        <input
+          type="text"
+          name="ownerName"
+          value={ownerName}
+          onChange={(e) => setOwnerName(e.target.value)}
+          style={styles.input}
+          required
+        />
         <label style={styles.label}>Pet Name</label>
         <input
           type="text"
           name="petName"
           value={petName}
           onChange={(e) => setPetName(e.target.value)}
+          style={styles.input}
+          required
+        />
+        <label style={styles.label}>Location</label>
+        <input
+          type="text"
+          name="location"
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
           style={styles.input}
           required
         />
@@ -179,7 +230,15 @@ export const Dashboard = () => {
           style={styles.input}
           required
         />
-        
+        <label style={styles.label}>Time</label>
+        <input
+          type="time"
+          name="time"
+          value={newPlaydate.time}
+          onChange={handleInputChange}
+          style={styles.input}
+          required
+        />
         <label style={styles.label}>Please upload a picture of your pet</label>
         <input
           type="file"
@@ -197,8 +256,11 @@ export const Dashboard = () => {
         {playdates.map((playdate) => (
           <li key={playdate.id} style={styles.playdateItem}>
             <div>
+              <div>Owner: {playdate.ownerName}</div>
               <div>Pet: {playdate.petName}</div>
+              <div>Location: {playdate.location}</div>
               <div>Date: {playdate.date}</div>
+              <div>Time: {playdate.time}</div>
               <img src={playdate.img} width="200" height="200" alt="Playdate"/>
             </div>
           </li>

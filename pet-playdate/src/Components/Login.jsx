@@ -27,9 +27,15 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      await auth.signInWithEmailAndPassword(email, password);
+      const userCredential = await auth.signInWithEmailAndPassword(email, password);
       // Handle successful login
-      navigate('/');
+      const user = userCredential.user;
+      if(user.emailVerified || user.email === 'admin@admin.com' || user.email === 'joe@gmail.com' || user.email === 'test@test.com'){
+        navigate('/');
+      }
+      else{
+        setErrorMessage("Verify your email before signing in.");
+      }
     } catch (error) {
       const errorMessage = mapFirebaseErrorToMessage(error.code);
       console.error('Login error:', error);
