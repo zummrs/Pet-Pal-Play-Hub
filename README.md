@@ -6,6 +6,9 @@ Christian Lara, Andrew Higa, Gregory Sanchez, Jonathan Luu
 PetPalsPlayHub: 
 https://project-54940.web.app/
 
+Presentation/demo:
+https://youtu.be/gc0MqbVB8jo
+
 installation:
 ### `npm i`
 
