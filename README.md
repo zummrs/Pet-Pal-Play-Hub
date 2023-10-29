@@ -9,7 +9,7 @@ https://project-54940.web.app/
 installation:
 ### `npm i`
 
-reinitialize 
+Reinitialize project.
 
 ### `npm start`
 Runs the app in the development mode.\
