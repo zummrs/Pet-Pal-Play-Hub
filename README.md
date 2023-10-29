@@ -23,14 +23,34 @@ The PetPalsPlayHub is a web application that enables pet owners to easily schedu
 
 
 Project Screenhots:
+
+
 Dashboard
+
+
 ![Dash](https://github.com/gls1993/349-Group-Project/assets/100191377/790bb485-361a-4176-9e9d-6566492b60cf)
+
+
 Login
+
+
 ![Login](https://github.com/gls1993/349-Group-Project/assets/100191377/891c6548-74c8-4fd9-af3a-a26a46d51165)
+
+
 Signup
+
+
 ![Signup](https://github.com/gls1993/349-Group-Project/assets/100191377/aa4f443a-1fe9-4aa6-aa7f-c7600a79e170)
+
+
 Profile
+
+
 ![Profile](https://github.com/gls1993/349-Group-Project/assets/100191377/44d93e6d-0d59-4765-a058-afcc355affd4)
+
+
 Listings
+
+
 ![image](https://github.com/gls1993/349-Group-Project/assets/100191377/8995bb9e-9e67-4f2a-8b93-cf241323577f)
 
