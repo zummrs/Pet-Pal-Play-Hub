@@ -3,7 +3,7 @@ Members:
 Christian Lara, Andrew Higa, Gregory Sanchez, Jonathan Luu
 
 
-##PetPalsPlayHub
+#PetPalsPlayHub
 
 installation:
 ### `npm i`
