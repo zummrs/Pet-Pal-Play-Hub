@@ -88,6 +88,10 @@ export const Dashboard = () => {
     navigate('/login');
   };
 
+  const handleProfile = () => {
+    navigate('/profile');
+  };
+
   // input handlers
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -211,6 +215,7 @@ export const Dashboard = () => {
     <div style={styles.container}>
       <div>
         <div>Welcome back, {username}</div>
+        <button onClick={handleProfile} style={styles.button}>Profile</button>
         <button onClick={handleLogout} style={styles.button}>Logout</button>
       </div>
 
