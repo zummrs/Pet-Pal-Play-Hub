@@ -9,6 +9,7 @@ const ForgotPassword = () => {
   const [successMessage, setSuccessMessage] = useState('');
   const navigate = useNavigate();
 
+  // Function to map Firebase error codes to user-friendly error messages
   const mapFirebaseErrorToMessage = (errorCode) => {
     switch (errorCode) {
       case 'auth/invalid-email':
@@ -20,13 +21,16 @@ const ForgotPassword = () => {
     }
   };
 
+  // Function to handle the password reset process
   const handlePasswordReset = async (e) => {
     e.preventDefault();
     try {
+      // Send a password reset email to the provided email address
       await auth.sendPasswordResetEmail(email);
       setSuccessMessage('Password reset email sent successfully.');
     } catch (error) {
       console.error('Password reset error:', error);
+      // Handle password reset errors and display appropriate error messages
       setError(mapFirebaseErrorToMessage(error.code));
     }
   };
@@ -46,7 +50,7 @@ const ForgotPassword = () => {
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
-        </div>
+      </div>
       <div className='error-message'>
         {error && <span>{error}</span>}
       </div>

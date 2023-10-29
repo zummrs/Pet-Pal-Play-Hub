@@ -5,6 +5,7 @@ import './LoginSignup.css';
 import email_icon from './Assets/email.png';
 import password_icon from './Assets/password.png';
 
+// Function to map Firebase error codes to user-friendly error messages
 const mapFirebaseErrorToMessage = (errorCode) => {
   switch (errorCode) {
     case 'auth/invalid-email':
@@ -24,19 +25,23 @@ const Login = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
+  // Function to handle the login process
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
+      // Attempt to sign in using the provided email and password
       const userCredential = await auth.signInWithEmailAndPassword(email, password);
-      // Handle successful login
+
+      // Check if the login was successful
       const user = userCredential.user;
-      if(user.emailVerified || user.email === 'admin@admin.com' || user.email === 'joe@gmail.com' || user.email === 'test@test.com'){
+      if (user.emailVerified || user.email === 'admin@admin.com' || user.email === 'joe@gmail.com' || user.email === 'test@test.com') {
+        // Navigate to the main page upon successful login
         navigate('/');
-      }
-      else{
+      } else {
         setErrorMessage("Verify your email before signing in.");
       }
     } catch (error) {
+      // Handle login errors and display appropriate error messages
       const errorMessage = mapFirebaseErrorToMessage(error.code);
       console.error('Login error:', error);
       setErrorMessage(errorMessage);

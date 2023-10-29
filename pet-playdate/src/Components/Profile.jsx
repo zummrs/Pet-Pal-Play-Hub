@@ -3,11 +3,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import { auth } from '../firebase/firebase';
 import { updateProfile } from 'firebase/auth';
 
-// db
+// Import Firestore related functions and references
 import { playdatesCollectionRef } from '../firebase/firebase';  // ref to playdates collection in firestore(db)
 import 'firebase/compat/firestore';
 import { addDoc, getDocs } from 'firebase/firestore';
 
+
+// Styles for components
 const styles = {
   container: {
     maxWidth: '600px',
@@ -54,6 +56,7 @@ const styles = {
 };
 
 export const Profile = () => {
+  // Define states to manage user profile data
   const [username, setUsername] = useState('');
   const [ownerName, setOwnerName] = useState('');
   const [location, setLocation] = useState('');
@@ -69,18 +72,18 @@ export const Profile = () => {
   const [favoriteToy, setFavoriteToy] = useState('');
   const [favoriteTreat, setFavoriteTreat] = useState('');
   const [numPlaydates, setNumPlaydates] = useState(0);
-
+    // Get a reference to the navigation function for routing
   const navigate = useNavigate();
-
+   // Function to handle user logout
   const handleLogout = () => {
-    auth.signOut();
-    navigate('/login');
+    auth.signOut(); // Sign the user out
+    navigate('/login'); // Redirect to the login page
   };
-
+  // Function to navigate to the playdate scheduling page
   const handleSchedulePlaydate = () => {
-    navigate('/');
+    navigate('/'); // Redirect to the playdate scheduling page
   };
-
+  // Fetch and display user data when the component loads
   useEffect(() => {
     const fetchData = async () => {
       const currentUser = auth.currentUser;
@@ -102,6 +105,7 @@ export const Profile = () => {
 
       <h2>{username}'s Profile</h2>
       <div style={styles.inputContainer}>
+          {/* Render input fields and labels for various user profile data */}
         <label style={styles.label}>Username</label>
         <text style={styles.input}>
           {username}

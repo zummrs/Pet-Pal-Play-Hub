@@ -4,9 +4,7 @@ import { auth } from '../firebase/firebase';
 import { updateProfile } from 'firebase/auth';
 import email_icon from './Assets/email.png';
 import password_icon from './Assets/password.png';
-import user_icon from './Assets/person.png'
-
-
+import user_icon from './Assets/person.png';
 
 const Signup = () => {
   const [email, setEmail] = useState('');
@@ -16,7 +14,7 @@ const Signup = () => {
   const [emailVerification, setEmailVerification] = useState(false);
   const navigate = useNavigate();
 
-
+  // Function to map Firebase error codes to user-friendly error messages
   const mapFirebaseErrorToMessage = (errorCode) => {
     switch (errorCode) {
       case 'auth/email-already-in-use':
@@ -34,6 +32,7 @@ const Signup = () => {
     }
   };
 
+  // Function to handle the signup process
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
@@ -43,12 +42,18 @@ const Signup = () => {
   
       const user = userCredential.user;
 
+      // Send an email verification to the user
       await user.sendEmailVerification();
       setEmailVerification(true);
+
+      // Update the user's profile with the provided username
       await updateProfile(user, { displayName: username });
+
+      // Redirect to the home page or another destination after successful signup
       // navigate('/');
     } catch (error) {
       console.error('Signup error:', error);
+      // Handle signup errors and display appropriate error messages
       setError(mapFirebaseErrorToMessage(error.code));
     }
   };
@@ -60,7 +65,7 @@ const Signup = () => {
         <div className='underline'></div>
       </div>
       <div className='inputs'>
-      <div className='input'>
+        <div className='input'>
           <img src={user_icon} alt='' />
           <input
             type='text'
