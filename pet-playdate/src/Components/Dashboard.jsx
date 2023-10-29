@@ -46,6 +46,8 @@ const styles = {
   },
   playdateList: {
     marginTop: '20px',
+    color: 'black',
+    fontWeight: 'bold',
   },
   playdateItem: {
     backgroundColor: 'white',
@@ -57,6 +59,11 @@ const styles = {
     boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)',
     border: '1px solid #ccc',
     borderRadius: '5px',
+  },
+  postName: {
+    fontSize: 14,
+    fontWeight: 'normal',
+
   },
 };
 
@@ -124,7 +131,10 @@ export const Dashboard = () => {
   const handlePlaydateSubmit = async () => {
     // Here, you should send the new playdate information to your backend or data source
     // and then update the playdates state with the newly created playdate.
-
+    
+    // Users email is stored on submission
+    const userEmail = auth.currentUser.email;
+    const userName = auth.currentUser.displayName
 
     // check if fields are empty
     if (!ownerName || !petName || !location || !newPlaydate.date || !image) {
@@ -154,8 +164,11 @@ export const Dashboard = () => {
       date: newPlaydate.date,
       id: playdates.length + 1, // You should adjust this according to your backend logic.
       time: timeConversion(newPlaydate.time), 
-      img: imageUrl // store url (img src)
+      img: imageUrl, // store url (img src)
+      email: userEmail,
+      listedUserName: userName,
     };
+
 
     // post submission to firestore
     await addDoc(playdatesCollectionRef, newPlaydateWithId)
@@ -169,6 +182,15 @@ export const Dashboard = () => {
       image: null,
     });
     
+  };
+
+  const handleContactClick = (ownerEmail) => {
+    const subject = 'Regarding Your Pet Listing';
+    const body = 'Hello, I am interested in meeting up for your listed playdate!';
+  
+    const mailtoLink = `mailto:${ownerEmail}?subject=${subject}&body=${body}`;
+  
+    window.location.href = mailtoLink;
   };
 
   useEffect(() => {
@@ -188,8 +210,8 @@ export const Dashboard = () => {
 
     <div style={styles.container}>
       <div>
-        <div>Hello, {username}</div>
-        <button onClick={handleLogout}>Logout</button>
+        <div>Welcome back, {username}</div>
+        <button onClick={handleLogout} style={styles.button}>Logout</button>
       </div>
 
       <h2>Schedule a Playdate</h2>
@@ -262,6 +284,9 @@ export const Dashboard = () => {
               <div>Date: {playdate.date}</div>
               <div>Time: {playdate.time}</div>
               <img src={playdate.img} width="200" height="200" alt="Playdate"/>
+              <div style={styles.postName}>Listed By: {playdate.listedUserName}</div>
+              {/* <button onClick={null} style={styles.button}>Contact</button> */}
+              <button onClick={() => handleContactClick(playdate.email)} style={styles.button} >Contact</button>
             </div>
           </li>
         ))}
