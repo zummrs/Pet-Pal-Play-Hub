@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { auth } from '../firebase/firebase';
-import './LoginSignup.css';
+import './LoginSignup.css'; 
 import email_icon from './Assets/email.png';
 import password_icon from './Assets/password.png';
+import dogs_playing from './Assets/dogs_playing.jpg'
 
 // Function to map Firebase error codes to user-friendly error messages
 const mapFirebaseErrorToMessage = (errorCode) => {
+
   switch (errorCode) {
     case 'auth/invalid-email':
       return 'The email address is not valid.';
@@ -24,14 +26,12 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
-
   // Function to handle the login process
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       // Attempt to sign in using the provided email and password
       const userCredential = await auth.signInWithEmailAndPassword(email, password);
-
       // Check if the login was successful
       const user = userCredential.user;
       if (user.emailVerified || user.email === 'admin@admin.com' || user.email === 'joe@gmail.com' || user.email === 'test@test.com') {
@@ -49,46 +49,43 @@ const Login = () => {
   };
 
   return (
-    <div className='container'>
-      <div className='header'>
-        <div className='text'>Login</div>
-        <div className='underline'></div>
-      </div>
-      <div className='inputs'>
-        <div className='input'>
-          <img src={email_icon} alt='' />
-          <input
-            type='email'
-            placeholder='Email'
-            onChange={(e) => setEmail(e.target.value)}
-          />
+    <div className="full-background-container" style={{ backgroundImage: `url(${dogs_playing})` }}>
+      <div className='container'>
+        <div className='header'>
+          <div className='text'>Login</div>
+          <div className='underline'></div>
         </div>
-        <div className='input'>
-          <img src={password_icon} alt='' />
-          <input
-            type='password'
-            placeholder='Password'
-            onChange={(e) => setPassword(e.target.value)}
-          />
+        <div className='inputs'>
+          <div className='input'>
+            <img src={email_icon} alt='' />
+            <input
+              type='email'
+              placeholder='Email'
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <div className='input'>
+            <img src={password_icon} alt='' />
+            <input
+              type='password'
+              placeholder='Password'
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
         </div>
-      </div>
-      <div className='submit-container'>
-        <div
-          className='submit'
-          onClick={(e) => {
-            handleLogin(e);
-          }}
-        >
-          Login
+        <div className='submit-container'>
+          <div className='submit' onClick={(e) => handleLogin(e)}>
+            Login
+          </div>
         </div>
-      </div>
-      {errorMessage && <div className='error-message'>{errorMessage}</div>}
-      <div className='forgot-password-link'>
-        <Link to='/forgotpassword'>Forgot your password?</Link>
-      </div>
-      <div className='signup-link'>
-        <span>Don't have an account? </span>
-        <Link to='/signup'>Sign up here</Link>
+        {errorMessage && <div className='error-message'>{errorMessage}</div>}
+        <div className='forgot-password-link'>
+          <Link to='/forgotpassword'>Forgot your password?</Link>
+        </div>
+        <div className='signup-link'>
+          <span>Don't have an account? </span>
+          <Link to='/signup'>Sign up here</Link>
+        </div>
       </div>
     </div>
   );

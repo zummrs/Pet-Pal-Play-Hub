@@ -1,0 +1,90 @@
+.profile-container {
+    max-width: 100%;
+    height: 100vh;
+    margin: 0 auto;
+    padding: 20px;
+    background-image: url('./Assets/sleeping_cat.jpg');
+    background-size: cover;
+    background-position: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .button {
+    padding: 10px;
+    background-color: #ff7733;
+    color: #fff; 
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 19px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  .welcome-message{
+    color: black;
+    font-family: 'Comic Sans MS', cursive; 
+  }
+
+  .label {
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 10px;
+  }
+  
+  .navbar-link {
+    text-decoration: none;
+    background-color: #ff7733;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 19px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 10px;
+    margin: 0 10px;
+  }
+  
+  
+  .input-container {
+    float: left;
+    width: 30%;
+    padding: 20px;
+    background-color: rgba(255, 237, 204, 0.75);
+    overflow-y: auto; 
+    max-height: 800px; 
+  }
+  
+  .input {
+    padding: 10px;
+    border: none; 
+    border-radius: 10px;
+    margin-bottom: 15px;
+    width: 100%; 
+    height: 50px; 
+    background: transparent; 
+    outline: none;
+    color: #ff7733; 
+    font-size: 19px;
+    font-family: 'Comic Sans MS', cursive;
+    
+  }
+
+  
+  .input-container::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  .input-container::-webkit-scrollbar-thumb {
+    background: #ff7733;
+    border-radius: 4px;
+  }

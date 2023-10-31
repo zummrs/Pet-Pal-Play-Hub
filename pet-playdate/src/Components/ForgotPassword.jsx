@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { auth } from '../firebase/firebase';
 import email_icon from './Assets/email.png';
+import dog from './Assets/dog.jpg'
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
@@ -36,40 +37,42 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className='container'>
-      <div className='header'>
-        <div className='text'>Reset Password</div>
-        <div className='underline'></div>
-      </div>
-      <div className='inputs'>
-        <div className='input'>
-          <img src={email_icon} alt='' />
-          <input
-            type='email'
-            placeholder='Email'
-            onChange={(e) => setEmail(e.target.value)}
-          />
+    <div className="full-background-container" style={{ backgroundImage: `url(${dog})` }}>
+      <div className='container'>
+        <div className='header'>
+          <div className='text'>Reset Password</div>
+          <div className='underline'></div>
         </div>
-      </div>
-      <div className='error-message'>
-        {error && <span>{error}</span>}
-      </div>
-      <div className='success-message'>
-        {successMessage && <span>{successMessage}</span>}
-      </div>
-      <div className='submit-container'>
-        <div
-          className='submit'
-          onClick={(e) => {
-            handlePasswordReset(e);
-          }}
-        >
-          Reset
+        <div className='inputs'>
+          <div className='input'>
+            <img src={email_icon} alt='' />
+            <input
+              type='email'
+              placeholder='Email'
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
         </div>
-      </div>
-      <div className='login-link'>
-        <span>Remembered your password? </span>
-        <Link to='/login'>Login here</Link>
+        <div className='error-message'>
+          {error && <span>{error}</span>}
+        </div>
+        <div className='success-message'>
+          {successMessage && <span>{successMessage}</span>}
+        </div>
+        <div className='submit-container'>
+          <div
+            className='submit'
+            onClick={(e) => {
+              handlePasswordReset(e);
+            }}
+          >
+            Reset
+          </div>
+        </div>
+        <div className='login-link'>
+          <span>Remembered your password? </span>
+          <Link to='/login'>Login here</Link>
+        </div>
       </div>
     </div>
   );

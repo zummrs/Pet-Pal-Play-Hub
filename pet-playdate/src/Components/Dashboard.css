@@ -1,0 +1,124 @@
+.dashboard-container {
+  max-width: 100%;
+  height: 100vh;
+  margin: 0 auto;
+  padding: 20px;
+  background-image: url('./Assets/beach.jpg');
+  background-size: cover;
+  background-position: center;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.button {
+  padding: 10px;
+  background-color: #ff7733;
+  color: #fff; 
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 19px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.label {
+  margin-bottom: 8px;
+  font-weight: bold;
+  
+  
+}
+
+.playdateList {
+  margin-top: 20px;
+  color: #ff7733;
+  font-weight: 700;
+  
+}
+
+.playdateItem {
+  background-color: rgba(255, 237, 204, 0.75);
+  max-width: 75%;
+  padding: 15px;
+  margin: 10px 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: none; 
+  border-radius: 10px; 
+}
+
+.postName {
+  font-size: 19px;
+  color: #ff7733; 
+  font-weight: 700;
+  font-family: 'Comic Sans MS', cursive; 
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 10px;
+}
+
+.navbar-link {
+  text-decoration: none;
+  background-color: #ff7733;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 19px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 10px;
+  margin: 0 10px;
+}
+
+
+.input-container {
+  float: left;
+  width: 30%;
+  padding: 20px;
+  background-color: rgba(255, 237, 204, 0.75);
+  border-radius: 10px;
+  overflow-x: hidden;
+}
+
+.input {
+  padding: 10px;
+  border: none; 
+  border-radius: 10px;
+  margin-bottom: 15px;
+  width: 100%; 
+  height: 50px; 
+  background: transparent; 
+  outline: none;
+  color: #ff7733; 
+  font-size: 19px;
+  background-color: rgba(255, 237, 204, 0.75);
+  font-family: 'Comic Sans MS', cursive;
+}
+
+.playdates-container {
+  float: right;
+  width: 50%;
+  max-height: 850px;
+  overflow-y: auto;
+  padding: 20px;
+  background-color: rgba(255, 237, 204, 0.75);
+  border-radius: 10px; 
+}
+
+.playdates-container::-webkit-scrollbar {
+  width: 4px;
+}
+
+.playdates-container::-webkit-scrollbar-thumb {
+  background: #ff7733;
+  border-radius: 4px;
+}

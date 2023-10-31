@@ -5,6 +5,7 @@ import { updateProfile } from 'firebase/auth';
 import email_icon from './Assets/email.png';
 import password_icon from './Assets/password.png';
 import user_icon from './Assets/person.png';
+import cat from './Assets/cat.jpg'
 
 const Signup = () => {
   const [email, setEmail] = useState('');
@@ -49,8 +50,6 @@ const Signup = () => {
       // Update the user's profile with the provided username
       await updateProfile(user, { displayName: username });
 
-      // Redirect to the home page or another destination after successful signup
-      // navigate('/');
     } catch (error) {
       console.error('Signup error:', error);
       // Handle signup errors and display appropriate error messages
@@ -59,59 +58,61 @@ const Signup = () => {
   };
   
   return (
-    <div className='container'>
-      <div className='header'>
-        <div className='text'>Sign Up</div>
-        <div className='underline'></div>
-      </div>
-      <div className='inputs'>
-        <div className='input'>
-          <img src={user_icon} alt='' />
-          <input
-            type='text'
-            placeholder='Username'
-            onChange={(e) => setUsername(e.target.value)}
-          />
+    <div className="full-background-container" style={{ backgroundImage: `url(${cat})` }}>
+        <div className='container'>
+          <div className='header'>
+            <div className='text'>Sign Up</div>
+            <div className='underline'></div>
+          </div>
+          <div className='inputs'>
+            <div className='input'>
+              <img src={user_icon} alt='' />
+              <input
+                type='text'
+                placeholder='Username'
+                onChange={(e) => setUsername(e.target.value)}
+              />
+            </div>
+            <div className='input'>
+              <img src={email_icon} alt='' />
+              <input
+                type='email'
+                placeholder='Email'
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div className='input'>
+              <img src={password_icon} alt='' />
+              <input
+                type='password'
+                placeholder='Password'
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+          </div>
+          <div className='error-message'>
+            {error && <span>{error}</span>}
+          </div>
+          {emailVerification ? (
+            <div className='verification-message'>
+              Verification email sent! Please check your email and verify your account.
+            </div>
+          ) : null}
+          <div className='submit-container'>
+            <div
+              className='submit'
+              onClick={(e) => {
+                handleSignup(e);
+              }}>
+              Sign Up
+            </div>
+          </div>
+          <div className='login-link'>
+            <span>Already have an account? </span>
+            <Link to='/login'>Login here</Link>
+          </div>
         </div>
-        <div className='input'>
-          <img src={email_icon} alt='' />
-          <input
-            type='email'
-            placeholder='Email'
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div className='input'>
-          <img src={password_icon} alt='' />
-          <input
-            type='password'
-            placeholder='Password'
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
       </div>
-      <div className='error-message'>
-        {error && <span>{error}</span>}
-      </div>
-      {emailVerification ? (
-        <div className='verification-message'>
-          Verification email sent! Please check your email and verify your account.
-        </div>
-      ) : null}
-      <div className='submit-container'>
-        <div
-          className='submit'
-          onClick={(e) => {
-            handleSignup(e);
-          }}>
-          Sign Up
-        </div>
-      </div>
-      <div className='login-link'>
-        <span>Already have an account? </span>
-        <Link to='/login'>Login here</Link>
-      </div>
-    </div>
   );
 };
 
