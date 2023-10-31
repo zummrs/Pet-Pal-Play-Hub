@@ -59,7 +59,7 @@
     display: flex;
     align-items: center;
     margin: auto;
-    width: 480px;
+    width: 480px !important;
     height: 80px;
     background: #ffedcc;
     border-radius: 10px;
