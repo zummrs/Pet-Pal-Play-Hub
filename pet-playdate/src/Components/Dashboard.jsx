@@ -258,6 +258,13 @@ export const Dashboard = () => {
         {playdates.map((playdate) => (
           <li key={playdate.id} style={styles.playdateItem}>
             <div>
+              <div>Owner: {playdate.ownerName}</div>
+              <div>Pet: {playdate.petName}</div>
+              <div>Location: {playdate.location}</div>
+              <div>Date: {playdate.date}</div>
+              <div>Time: {playdate.time}</div>
+              <img src={playdate.img} width="200" height="200" alt="Playdate"/>
+              <div style={styles.postName}>Listed By: {playdate.listedUserName}</div>
               {/* Display playdate details and contact button */}
               <button onClick={() => handleContactClick(playdate.email)} style={styles.button}>
                 Contact
