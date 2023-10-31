@@ -90,8 +90,8 @@ const styles = {
 };
 
 export const Dashboard = () => {
-  // State variables for user information and playdates
-  const [username, setUsername] = useState('');
+  // declare local vars
+  const [username, setUsername] = useState(''); // Remove owner's name
   const [petName, setPetName] = useState('');
   const [location, setLocation] = useState('');
   const [ownerName, setOwnerName] = useState('');
@@ -104,18 +104,16 @@ export const Dashboard = () => {
 
   const navigate = useNavigate();
 
-  // Handle user logout
   const handleLogout = () => {
     auth.signOut();
     navigate('/login');
   };
 
-  // Navigate to user profile
   const handleProfile = () => {
     navigate('/profile');
   };
 
-  // Input change handlers
+  // input handlers
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setNewPlaydate({
@@ -124,49 +122,114 @@ export const Dashboard = () => {
     });
   };
 
-  // Handle image upload
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     setImage(file);
   };
-
-  // Fetch playdates from Firestore
+  
+  // fetch playdates from firestore -> setPlaydates
   useEffect(() => {
     const fetchData = async () => {
-      const querySnapshot = await getDocs(playdatesCollectionRef);
-      const playdatesData = [];
+        // queries curr snapshot of collecion
+        const querySnapshot = await getDocs(playdatesCollectionRef);
+        const playdatesData = [];
 
-      querySnapshot.forEach((doc) => {
-        playdatesData.push({ id: doc.id, ...doc.data() });
-      });
+        // loops through query
+        querySnapshot.forEach((doc) => {
+          playdatesData.push({ id: doc.id, ...doc.data() });
+        });
+        
+        const currentUser = auth.currentUser;
+        if(currentUser){
+          setUsername(currentUser.displayName);
+        }
 
-      const currentUser = auth.currentUser;
-      if (currentUser) {
-        setUsername(currentUser.displayName);
-      }
+        // local
+        setPlaydates(playdatesData);
 
-      setPlaydates(playdatesData);
     };
 
     fetchData();
   }, []);
 
-  // Handle playdate submission
+
   const handlePlaydateSubmit = async () => {
-    // Handle playdate submission and Firestore data storage
+    // Here, you should send the new playdate information to your backend or data source
+    // and then update the playdates state with the newly created playdate.
+    
+    // Users email is stored on submission
+    const userEmail = auth.currentUser.email;
+    const userName = auth.currentUser.displayName
 
-    // ... (Code for validation, image upload, and data submission)
+    // check if fields are empty
+    if (!ownerName || !petName || !location || !newPlaydate.date || !image) {
+      // Display an error message or handle the validation as needed
+      alert('All fields required.');
+      return; // Prevent submission
+    }
 
-    // Update local state with the new playdate
+    // create a ref to storage w/ image name, then upload and get the url
+    const storageRef = ref(storage, 'images/' + image.name);
+    uploadBytes(storageRef, image);
+    const imageUrl = await getDownloadURL(storageRef);
+    
+
+    const timeConversion = (timeConverted) => {
+      const [hours, minutes] = timeConverted.split(':');
+      const amPm = hours >= 12 ? "PM" : "AM";
+      const hoursFormat = (hours % 12) || 12;
+
+      return `${hoursFormat}:${minutes} ${amPm}`;
+    };
+    // For this example, let's assume the backend sends back the new playdate with an ID.
+    const newPlaydateWithId = {
+      ownerName, 
+      petName,
+      location,
+      date: newPlaydate.date,
+      id: playdates.length + 1, // You should adjust this according to your backend logic.
+      time: timeConversion(newPlaydate.time), 
+      img: imageUrl, // store url (img src)
+      email: userEmail,
+      listedUserName: userName,
+    };
+
+
+    // post submission to firestore
+    await addDoc(playdatesCollectionRef, newPlaydateWithId)
+     
+    // update local
+    setPlaydates([...playdates, newPlaydateWithId]);
+
+    // Clear the form
+    setNewPlaydate({
+      date: '',
+      image: null,
+    });
+    
   };
 
-  // Handle contacting the owner
   const handleContactClick = (ownerEmail) => {
-    // Generate a 'mailto' link for contacting the owner
+    const subject = 'Regarding Your Pet Listing';
+    const body = 'Hello, I am interested in meeting up for your listed playdate!';
+  
+    const mailtoLink = `mailto:${ownerEmail}?subject=${subject}&body=${body}`;
+  
+    window.location.href = mailtoLink;
   };
 
-  // Sort playdates by date
+  useEffect(() => {
+    const currentUser = auth.currentUser;
+    if (currentUser) {
+      // You can optionally set the username here, but we're not using it in this example.
+      // setUsername(currentUser.displayName || 'User');
+    }
+  }, []);
+
+
+  // sort local playdates[] by date
   playdates.sort((a, b) => new Date(a.date) - new Date(b.date));
+
 
   return (
     <div style={styles.container}>
