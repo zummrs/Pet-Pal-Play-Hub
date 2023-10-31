@@ -31,32 +31,35 @@ Project Screenhots:
 Dashboard
 
 
-![Dash](https://github.com/gls1993/349-Group-Project/assets/100191377/790bb485-361a-4176-9e9d-6566492b60cf)
+![dashboard](https://github.com/gls1993/349-Group-Project/assets/14078583/843c732d-add4-4593-b457-f5ca1acf58fa)
+
 
 
 Login
 
 
-![Login](https://github.com/gls1993/349-Group-Project/assets/100191377/891c6548-74c8-4fd9-af3a-a26a46d51165)
+![Login](https://github.com/gls1993/349-Group-Project/assets/14078583/8cf1a479-6a93-42ea-9843-8276ae2c2d0e)
+
 
 
 Signup
 
 
-![Signup](https://github.com/gls1993/349-Group-Project/assets/100191377/aa4f443a-1fe9-4aa6-aa7f-c7600a79e170)
+![Signup](https://github.com/gls1993/349-Group-Project/assets/14078583/50f9dd4e-c034-4713-a1bc-cbea900423be)
 
 
 Profile
 
 
-![Profile](https://github.com/gls1993/349-Group-Project/assets/100191377/44d93e6d-0d59-4765-a058-afcc355affd4)
+![Profile](https://github.com/gls1993/349-Group-Project/assets/14078583/5d67f76b-2216-4307-b71f-42fab5ca12ce)
 
-
-Listings
-
-
-![image](https://github.com/gls1993/349-Group-Project/assets/100191377/8995bb9e-9e67-4f2a-8b93-cf241323577f)
 
 Forgot Password
 
 ![Password Reset](https://github.com/gls1993/349-Group-Project/assets/14078583/30bfefdd-3729-46f5-b0c0-965ef0c58209)
+
+About
+
+![About Page](https://github.com/gls1993/349-Group-Project/assets/14078583/5a2b29eb-31a8-4029-9608-02604fea0614)
+
+
