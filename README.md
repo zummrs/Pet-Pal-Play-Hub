@@ -57,3 +57,6 @@ Listings
 
 ![image](https://github.com/gls1993/349-Group-Project/assets/100191377/8995bb9e-9e67-4f2a-8b93-cf241323577f)
 
+Forgot Password
+
+![Password Reset](https://github.com/gls1993/349-Group-Project/assets/14078583/30bfefdd-3729-46f5-b0c0-965ef0c58209)
