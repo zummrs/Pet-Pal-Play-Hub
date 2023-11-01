@@ -1,4 +1,4 @@
-# 349-Group 1.10 -Project documentation
+349-Group #1.11 -Project documentation
 Members:
 Christian Lara, Andrew Higa, Gregory Sanchez, Jonathan Luu
 
