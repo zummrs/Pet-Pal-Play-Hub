@@ -7,7 +7,7 @@ PetPalsPlayHub:
 https://project-54940.web.app/
 
 Presentation/demo:
-https://youtu.be/gc0MqbVB8jo
+https://www.youtube.com/watch?v=gzYsmrqBfSk
 
 installation:
 ### `npm i`
