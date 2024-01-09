@@ -1,70 +1,65 @@
-# Getting Started with Create React App
+349-Group #1.11 -Project documentation
+Members:
+Christian Lara, Andrew Higa, Gregory Sanchez, Jonathan Luu
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+PetPalsPlayHub: 
+https://project-54940.web.app/
 
-In the project directory, you can run:
+Presentation/demo:
+https://www.youtube.com/watch?v=gzYsmrqBfSk
+
+installation:
+### `npm i`
+
+Reinitialize project.
 
 ### `npm start`
-
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Project Overview:
 
-### `npm run build`
+The PetPalsPlayHub is a web application that enables pet owners to easily schedule playdates for their beloved pets. It provides a user-friendly platform where pet owners can create profiles for their pets, view other pets in the area, and schedule playdates with suitable companions. This project aims to bring pet owners together, foster social interactions among pets, and promote the well-being of our furry friends.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Project Screenhots:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+Dashboard
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![dashboard](https://github.com/gls1993/349-Group-Project/assets/14078583/843c732d-add4-4593-b457-f5ca1acf58fa)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+Login
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+![Login](https://github.com/gls1993/349-Group-Project/assets/14078583/8cf1a479-6a93-42ea-9843-8276ae2c2d0e)
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
+Signup
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
+![Signup](https://github.com/gls1993/349-Group-Project/assets/14078583/50f9dd4e-c034-4713-a1bc-cbea900423be)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
+Profile
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
+![Profile](https://github.com/gls1993/349-Group-Project/assets/14078583/5d67f76b-2216-4307-b71f-42fab5ca12ce)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### `npm run build` fails to minify
+Forgot Password
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+![Password Reset](https://github.com/gls1993/349-Group-Project/assets/14078583/30bfefdd-3729-46f5-b0c0-965ef0c58209)
+
+About
+
+![About Page](https://github.com/gls1993/349-Group-Project/assets/14078583/5a2b29eb-31a8-4029-9608-02604fea0614)
+
+
